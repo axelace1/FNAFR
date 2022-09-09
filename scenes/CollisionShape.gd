@@ -1,5 +1,4 @@
 extends CollisionShape
-onready var player_vars = get_node("/root/player")
 
 
 # Declare member variables here. Examples:
@@ -9,7 +8,7 @@ onready var player_vars = get_node("/root/player")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	disabled = true
+	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

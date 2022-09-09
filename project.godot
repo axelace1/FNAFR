@@ -25,7 +25,6 @@ config/icon="res://icon.png"
 
 fader="*res://nodes/fader.tscn"
 fullscreen="*res://nodes/fullscreen.tscn"
-Player="*res://scripts/player.gd"
 
 [display]
 
