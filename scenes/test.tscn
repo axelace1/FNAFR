@@ -513,23 +513,21 @@ shape = SubResource( 3 )
 [node name="StaticBody" type="StaticBody" parent="."]
 
 [node name="KinematicBody" type="KinematicBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 36.2736 )
+transform = Transform( 18.1331, 0, 0, 0, 18.6741, 0, 0, 0, 4.82572, 0, 5.50137, 36.2736 )
 
 [node name="MeshInstance" type="MeshInstance" parent="KinematicBody"]
+transform = Transform( 0.0551479, 0, 0, 0, 0.0535499, 0, 0, 0, 0.456281, 0.567213, -0.333498, -7.51672 )
 mesh = ExtResource( 11 )
 material/0 = ExtResource( 15 )
 material/1 = null
 
 [node name="MeshInstance2" type="MeshInstance" parent="KinematicBody"]
-transform = Transform( 0.59287, 0, 0, 0, 0.59287, 0, 0, 0, 0.59287, -2.40417, 28.4283, 0 )
+transform = Transform( -0.0472692, 6.31057e-06, 1.86554e-05, 9.58625e-07, 0.0313291, -0.0028017, -0.000189082, -0.0198963, -0.0660619, -0.132585, 1.22774, -7.51672 )
 mesh = ExtResource( 8 )
 material/0 = null
 material/1 = null
 material/2 = null
 material/3 = null
-
-[node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
-transform = Transform( 1, 0, 0, 0, -5663.81, 0, 0, 0, 1, 0, 0, 0 )
 
 [connection signal="player_entered" from="WASD to move" to="WASD to move/text_message" method="_show_text"]
 [connection signal="player_exited" from="WASD to move" to="WASD to move/text_message" method="_hide_text"]
