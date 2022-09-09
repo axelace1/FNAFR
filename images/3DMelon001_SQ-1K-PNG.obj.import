@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/3DMelon001_SQ-1K-PNG.obj-e7173ded096df28351e5aaa39ad378f9.mesh"
+
+[deps]
+
+files=[ "res://.import/3DMelon001_SQ-1K-PNG.obj-e7173ded096df28351e5aaa39ad378f9.mesh" ]
+
+source_file="res://images/3DMelon001_SQ-1K-PNG.obj"
+dest_files=[ "res://.import/3DMelon001_SQ-1K-PNG.obj-e7173ded096df28351e5aaa39ad378f9.mesh", "res://.import/3DMelon001_SQ-1K-PNG.obj-e7173ded096df28351e5aaa39ad378f9.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

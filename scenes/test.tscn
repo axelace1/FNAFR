@@ -1,0 +1,537 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://nodes/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://nodes/test_cube.tscn" type="PackedScene" id=2]
+[ext_resource path="res://nodes/audio_player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://nodes/gizmo_cube.tscn" type="PackedScene" id=4]
+[ext_resource path="res://nodes/trigger_area.tscn" type="PackedScene" id=5]
+[ext_resource path="res://audio/cheer_up.wav" type="AudioStream" id=6]
+[ext_resource path="res://nodes/warp_gizmo.tscn" type="PackedScene" id=7]
+[ext_resource path="res://models/skull.obj" type="ArrayMesh" id=8]
+[ext_resource path="res://nodes/text_message.tscn" type="PackedScene" id=9]
+[ext_resource path="res://materials/concrete.tres" type="Material" id=10]
+[ext_resource path="res://models/untitled1.obj" type="ArrayMesh" id=11]
+[ext_resource path="res://models/untitled.obj" type="ArrayMesh" id=12]
+[ext_resource path="res://materials/woodPRO.tres" type="Material" id=13]
+[ext_resource path="res://scenes/doortest.gd" type="Script" id=14]
+[ext_resource path="res://materials/FREDBODY.tres" type="Material" id=15]
+[ext_resource path="res://materials/funny.tres" type="Material" id=16]
+[ext_resource path="res://images/cool one.png" type="Texture" id=17]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.574107
+height = 1.09812
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 1.01887, 1.30835, 0.751327 )
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_texture = ExtResource( 17 )
+uv1_scale = Vector3( 4, 3, 6 )
+uv1_offset = Vector3( 1, 1, 1 )
+
+[node name="test" type="Spatial"]
+
+[node name="player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1.5, 0, -1.31134e-07, 0, 1.5, 0, 1.31134e-07, 0, 1.5, 5.02789, 11.1519, 9.77167 )
+walk_speed = 24.0
+run_speed = 45.0
+jumprun_speed = 90.0
+jump_speed = 20.0
+acceleration = 4
+
+[node name="CollisionShape" type="CollisionShape" parent="player"]
+transform = Transform( 1, 1.42109e-14, 0, 0, 0.0130023, 0.999915, -7.10543e-15, -0.999915, 0.0130023, 0.00466156, -0.212835, -0.040305 )
+shape = SubResource( 1 )
+
+[node name="test_cube" parent="." instance=ExtResource( 2 )]
+transform = Transform( 150, 0, 0, 0, 1, 0, 0, 0, 150, -3.01425, -0.971779, 5.02329 )
+generate_lightmap = false
+material/0 = SubResource( 2 )
+
+[node name="WASD to move" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -69.7841 )
+
+[node name="gizmo_cube" parent="WASD to move" instance=ExtResource( 4 )]
+visible = false
+
+[node name="text_message" parent="WASD to move" instance=ExtResource( 9 )]
+message = "use WASD to move and mouse to look around
+
+"
+
+[node name="trigger_audio" parent="." instance=ExtResource( 5 )]
+transform = Transform( 7.33395, 0, 0, 0, 5.34045, 0, 0, 0, 9.14476, 39.6726, 1.03841, -36.1688 )
+visible = false
+
+[node name="gizmo_cube" parent="trigger_audio" instance=ExtResource( 4 )]
+
+[node name="audio_player" parent="trigger_audio" instance=ExtResource( 3 )]
+stream = ExtResource( 6 )
+volume_db = 24.0
+autoplay = true
+
+[node name="text_message" parent="trigger_audio" instance=ExtResource( 9 )]
+message = "I know the texture is broken. cry about it."
+
+[node name="trigger_extra" parent="." instance=ExtResource( 5 )]
+transform = Transform( -2.3274, 0, 0, 0, 3.85983, 0, 0, 0, 1.86066, 12.4342, 1.03841, -63.2735 )
+
+[node name="gizmo_cube" parent="trigger_extra" instance=ExtResource( 4 )]
+
+[node name="text_message" parent="trigger_extra" instance=ExtResource( 9 )]
+message = "that's all. btw shift to sprint"
+fade_out_time = 2.0
+
+[node name="warp_gizmo" parent="." instance=ExtResource( 7 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.88904, 1, -48.6234 )
+
+[node name="StaticBody4" type="StaticBody" parent="."]
+transform = Transform( -2.98921, 0.0269407, -0.000495713, -0.00126598, 0.00902325, 0.499404, 0.123409, 0.652649, -0.00688408, 4.6664, 4.49862, 12.3352 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody4"]
+transform = Transform( 5.4138, 3.72529e-09, 7.45058e-09, 1.19209e-07, 1, -7.91624e-08, -2.98023e-08, -1.97906e-09, 6.32771, 0, 1.41311, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody4"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody6" type="StaticBody" parent="."]
+transform = Transform( -0.00633409, -0.652945, -0.000495713, -0.00278507, -0.00036524, 0.499404, -0.201586, 0.0205214, -0.00688408, 9.01488, 4.49823, 11.9936 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody6"]
+transform = Transform( 5.4138, 3.72529e-09, 7.45058e-09, 1.19209e-07, 1, -7.91624e-08, -2.98023e-08, -1.97906e-09, 6.32771, 0, 1.41311, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody6"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody9" type="StaticBody" parent="."]
+transform = Transform( -0.00633409, -0.652945, -0.000495713, -0.00278507, -0.00036524, 0.499404, -0.201586, 0.0205214, -0.00688408, 2.29086, 4.49447, 12.205 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody9"]
+transform = Transform( 5.4138, 3.72529e-09, 7.45058e-09, 1.19209e-07, 1, -7.91624e-08, -2.98023e-08, -1.97906e-09, 6.32771, 0, 1.41311, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody9"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody14" type="StaticBody" parent="."]
+transform = Transform( -0.00633409, -0.652945, -0.000495713, -0.00278507, -0.00036524, 0.499404, -0.201586, 0.0205214, -0.00688408, 1.9148, 4.38337, 4.17263 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody14"]
+transform = Transform( 5.4138, 3.72529e-09, 7.45058e-09, 1.19209e-07, 1, -7.91624e-08, -2.98023e-08, -1.97906e-09, 6.32771, 0, 1.41311, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody14"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody15" type="StaticBody" parent="."]
+transform = Transform( -0.00633409, -0.652945, -0.000495713, -0.00278507, -0.00036524, 0.499404, -0.201586, 0.0205214, -0.00688408, 8.53417, 4.38707, 3.96459 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody15"]
+transform = Transform( 5.4138, 3.72529e-09, 7.45058e-09, 1.19209e-07, 1, -7.91624e-08, -2.98023e-08, -1.97906e-09, 6.32771, 0, 1.41311, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody15"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody16" type="StaticBody" parent="."]
+transform = Transform( -0.00633409, -0.652945, -0.000495713, -0.00278507, -0.00036524, 0.499404, -0.201586, 0.0205214, -0.00688408, 8.30318, 4.28551, -3.38702 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody16"]
+transform = Transform( 5.4138, 3.72529e-09, 7.45058e-09, 1.19209e-07, 1, -7.91624e-08, -2.98023e-08, -1.97906e-09, 6.32771, 0, 1.41311, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody16"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody17" type="StaticBody" parent="."]
+transform = Transform( -0.00633409, -2.53094, -0.000495713, -0.00278507, -0.00141574, 0.499404, -0.201586, 0.0795451, -0.00688408, -4.38158, 4.27841, -2.98835 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody17"]
+transform = Transform( 5.41381, 1.19209e-07, 4.47035e-08, 1.32248e-07, 2.63661, 1.01281e-08, 0, -3.25963e-09, 6.3277, 0.532846, 0.461378, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody17"]
+transform = Transform( 5.19713, 0, 5.96046e-08, 4.65661e-09, 1.85052, 1.62981e-08, -1.11759e-08, -3.25963e-09, 8.66888, -1.90735e-06, 0.310687, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody21" type="StaticBody" parent="."]
+transform = Transform( -0.00633409, -2.53094, -0.000495713, -0.00278507, -0.00141574, 0.499404, -0.201586, 0.0795451, -0.00688408, -5.63809, 3.8131, -40.2471 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody21"]
+transform = Transform( 5.41381, 1.19209e-07, 4.47035e-08, 1.32248e-07, 2.63661, 1.01281e-08, 0, -3.25963e-09, 6.3277, 0.532846, 0.461378, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody21"]
+transform = Transform( 5.19713, 0, 5.96046e-08, 4.65661e-09, 1.85052, 1.62981e-08, -1.11759e-08, -3.25963e-09, 8.66888, -1.90735e-06, 0.310687, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody24" type="StaticBody" parent="."]
+transform = Transform( -0.00633409, -2.53094, -0.000495713, -0.00278507, -0.00141574, 0.499404, -0.201586, 0.0795451, -0.00688408, -19.1454, 3.80554, -39.8226 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody24"]
+transform = Transform( 5.41381, 1.19209e-07, 4.47035e-08, 1.32248e-07, 2.63661, 1.01281e-08, 0, -3.25963e-09, 6.3277, 0.532846, 0.461378, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody24"]
+transform = Transform( 5.19713, 0, 5.96046e-08, 4.65661e-09, 1.85052, 1.62981e-08, -1.11759e-08, -3.25963e-09, 8.66888, -1.90735e-06, 0.310687, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody18" type="StaticBody" parent="."]
+transform = Transform( -0.00633409, -2.53094, -0.000495713, -0.00278507, -0.00141574, 0.499404, -0.201586, 0.0795451, -0.00688408, 14.6314, 4.28905, -3.58591 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody18"]
+transform = Transform( 5.41381, 1.19209e-07, 4.47035e-08, 1.32248e-07, 2.63661, 1.01281e-08, 0, -3.25963e-09, 6.3277, 0.532846, 0.461378, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody18"]
+transform = Transform( 5.19714, 1.19209e-07, 8.9407e-08, 7.45058e-09, 1.85052, 1.67638e-08, -1.86265e-09, -2.79397e-09, 8.66888, 9.53674e-07, 0.751663, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody20" type="StaticBody" parent="."]
+transform = Transform( -0.00633409, -2.53094, -0.000495713, -0.00278507, -0.00141574, 0.499404, -0.201586, 0.0795451, -0.00688408, 13.6597, 4.23417, -40.1095 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody20"]
+transform = Transform( 5.41381, 1.19209e-07, 4.47035e-08, 1.32248e-07, 2.63661, 1.01281e-08, 0, -3.25963e-09, 6.3277, 0.532846, 0.461378, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody20"]
+transform = Transform( 5.19714, 1.19209e-07, 8.9407e-08, 7.45058e-09, 1.85052, 1.67638e-08, -1.86265e-09, -2.79397e-09, 8.66888, 9.53674e-07, 0.751663, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody23" type="StaticBody" parent="."]
+transform = Transform( -0.00633409, -2.53094, -0.000495713, -0.00278507, -0.00141574, 0.499404, -0.201586, 0.0795451, -0.00688408, 26.4142, 4.2413, -40.5103 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody23"]
+transform = Transform( 5.41381, 1.19209e-07, 4.47035e-08, 1.32248e-07, 2.63661, 1.01281e-08, 0, -3.25963e-09, 6.3277, 0.532846, 0.461378, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody23"]
+transform = Transform( 5.19714, 1.19209e-07, 8.9407e-08, 7.45058e-09, 1.85052, 1.67638e-08, -1.86265e-09, -2.79397e-09, 8.66888, 9.53674e-07, 0.751663, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody25" type="StaticBody" parent="."]
+transform = Transform( -0.00633409, -2.53094, -0.000495713, -0.00278507, -0.00141574, 0.499404, -0.201586, 0.0795451, -0.00688408, 27.4582, 4.70032, -7.28593 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody25"]
+transform = Transform( 5.41381, 1.19209e-07, 4.47035e-08, 1.32248e-07, 2.63661, 1.01281e-08, 0, -3.25963e-09, 6.3277, 0.532846, 0.461378, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody25"]
+transform = Transform( 5.19714, 1.19209e-07, 8.9407e-08, 7.45058e-09, 1.85052, 1.67638e-08, -1.86265e-09, -2.79397e-09, 8.66888, 9.53674e-07, 0.751663, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody26" type="StaticBody" parent="."]
+transform = Transform( -0.00633408, -4.98948, -0.000495713, -0.00278507, -0.00279099, 0.499404, -0.201586, 0.156814, -0.00688408, 38.152, 4.47851, -24.147 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody26"]
+transform = Transform( 5.41381, 1.19209e-07, 4.47035e-08, 1.32248e-07, 2.63661, 1.01281e-08, 0, -3.25963e-09, 6.3277, 0.532846, 0.461378, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody26"]
+transform = Transform( 5.19714, 1.19209e-07, 8.9407e-08, 7.45058e-09, 1.85052, 1.67638e-08, -1.86265e-09, -2.79397e-09, 8.66888, 9.53674e-07, 0.751663, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody33" type="StaticBody" parent="."]
+transform = Transform( -0.00633408, -4.98948, -0.000495713, -0.00278507, -0.00279099, 0.499404, -0.201586, 0.156814, -0.00688408, 38.1264, 4.46726, -24.9614 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody33"]
+transform = Transform( 5.41381, -7.15256e-07, 7.45058e-08, 1.31782e-07, 2.63661, 1.00699e-08, 3.72529e-09, -1.86265e-09, 6.3277, 0.53289, -1.40268, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 16 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="StaticBody33"]
+transform = Transform( 1.92, -1.19209e-07, -2.98023e-08, 4.65661e-08, 1.08, -1.40863e-08, 1.11759e-08, 2.32831e-09, 6.328, 14.5515, -0.430087, -1.80148 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = SubResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody33"]
+transform = Transform( 5.19714, 1.19209e-07, 8.9407e-08, 7.45058e-09, 1.85052, 1.67638e-08, -1.86265e-09, -2.79397e-09, 8.66888, 9.53674e-07, 0.751663, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody28" type="StaticBody" parent="."]
+transform = Transform( -0.00633408, -2.81811, -0.000495713, -0.00278507, -0.00157638, 0.499404, -0.201586, 0.0885703, -0.00688408, 42.1671, 4.70881, -7.72966 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody28"]
+transform = Transform( 5.41382, -1.07288e-06, 2.08616e-07, 1.32248e-07, 2.86355, 6.8394e-09, 5.58794e-09, -6.0536e-09, 6.3277, 0.775581, 0.503553, -2.68754 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody28"]
+transform = Transform( 5.19714, 1.19209e-07, 8.9407e-08, 7.45058e-09, 1.85052, 1.67638e-08, -1.86265e-09, -2.79397e-09, 8.66888, 9.53674e-07, 0.751663, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody32" type="StaticBody" parent="."]
+transform = Transform( -0.00633408, -3.97727, -0.000495713, -0.00278507, -0.00222478, 0.499404, -0.201586, 0.125001, -0.00688408, 39.2229, 4.17287, -46.3973 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody32"]
+transform = Transform( 5.41382, -1.07288e-06, 2.08616e-07, 1.32248e-07, 2.86355, 6.8394e-09, 5.58794e-09, -6.0536e-09, 6.3277, 0.775581, 0.503553, -2.68754 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 16 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody32"]
+transform = Transform( 5.19714, 1.19209e-07, 8.9407e-08, 7.45058e-09, 1.85052, 1.67638e-08, -1.86265e-09, -2.79397e-09, 8.66888, 9.53674e-07, 0.751663, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody19" type="StaticBody" parent="."]
+transform = Transform( -0.00634335, -9.73619, -0.000495265, -0.00278915, -0.00544618, 0.498952, -0.201881, 0.305998, -0.00687786, 5.37153, 3.70451, -45.3244 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody19"]
+transform = Transform( 5.41381, 1.19209e-07, 4.47035e-08, 1.32248e-07, 2.63661, 1.01281e-08, 0, -3.25963e-09, 6.3277, 0.532846, 0.461378, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody19"]
+transform = Transform( 5.19714, 1.19209e-07, 8.9407e-08, 7.45058e-09, 1.85052, 1.67638e-08, -1.86265e-09, -2.79397e-09, 8.66888, 9.53674e-07, 0.751663, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody10" type="StaticBody" parent="."]
+transform = Transform( -0.0675035, -0.652945, -0.000495713, -0.0296809, -0.00036524, 0.499404, -2.14833, 0.0205214, -0.00688408, -10.2587, 4.35461, 2.96303 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody10"]
+transform = Transform( 5.4138, 3.72529e-09, 7.45058e-09, 1.19209e-07, 1, -7.91624e-08, -2.98023e-08, -1.97906e-09, 6.32771, 0, 1.41311, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody10"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody12" type="StaticBody" parent="."]
+transform = Transform( -0.0675035, -0.652945, -0.000495713, -0.0296809, -0.00036524, 0.499404, -2.14833, 0.0205214, -0.00688408, -11.2159, 3.93372, -27.5013 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody12"]
+transform = Transform( 5.4138, 3.72529e-09, 7.45058e-09, 1.19209e-07, 1, -7.91624e-08, -2.98023e-08, -1.97906e-09, 6.32771, 0, 1.41311, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody12"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody22" type="StaticBody" parent="."]
+transform = Transform( -0.0675035, -0.652945, -0.000495713, -0.0296809, -0.00036524, 0.499404, -2.14833, 0.0205214, -0.00688408, 19.6806, 3.951, -28.4723 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody22"]
+transform = Transform( 5.4138, 3.72529e-09, 7.45058e-09, 1.19209e-07, 1, -7.91624e-08, -2.98023e-08, -1.97906e-09, 6.32771, 0, 1.41311, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody22"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody27" type="StaticBody" parent="."]
+transform = Transform( -0.0675035, -0.652945, -0.000495713, -0.0296809, -0.00036524, 0.499404, -2.14833, 0.0205214, -0.00688408, 31.9259, 3.94371, -29.8835 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody27"]
+transform = Transform( 5.4138, 5.58794e-09, 7.45058e-09, -5.96046e-08, 1, -8.03266e-08, -2.98023e-08, -2.09548e-09, 6.32771, 1.90735e-06, 1.41311, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody27"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody34" type="StaticBody" parent="."]
+transform = Transform( -0.0675035, -0.652945, -0.000495713, -0.0296809, -0.00036524, 0.499404, -2.14833, 0.0205214, -0.00688408, 32.7433, 3.94417, -29.9092 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody34"]
+transform = Transform( 4.38517, 1.58325e-08, 1.86265e-08, -7.7486e-07, 0.999999, 1.00117e-08, -2.98023e-08, -2.21189e-09, 6.32771, 1.24204, 1.41312, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 16 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody34"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody31" type="StaticBody" parent="."]
+transform = Transform( -0.0675035, -0.652945, -0.000495713, -0.0296809, -0.00036524, 0.499404, -2.14833, 0.0205214, -0.00688408, 48.6345, 3.88203, -35.5613 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody31"]
+transform = Transform( 5.4138, 3.72529e-09, 7.45058e-09, 1.19209e-07, 1, -7.91624e-08, -2.98023e-08, -1.97906e-09, 6.32771, 0, 1.41311, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 16 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody31"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody30" type="StaticBody" parent="."]
+transform = Transform( -0.0120741, -0.652945, -0.000495713, -0.00530892, -0.00036524, 0.499404, -0.384265, 0.0205214, -0.00688408, 28.3503, 4.17429, -44.0362 )
+script = ExtResource( 14 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody30"]
+transform = Transform( 5.4138, 3.72529e-09, 0, 1.3411e-07, 1, -7.91624e-08, -4.47035e-08, -1.97906e-09, 6.32771, -7.62939e-06, 1.41311, -2.59533 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 13 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody30"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+script = ExtResource( 14 )
+
+[node name="StaticBody29" type="StaticBody" parent="."]
+transform = Transform( -0.0675035, -0.652945, -0.000495713, -0.0296809, -0.00036524, 0.499404, -2.14833, 0.0205214, -0.00688408, 49.397, 4.12169, -18.2297 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody29"]
+transform = Transform( 5.4138, 3.72529e-09, 7.45058e-09, 1.19209e-07, 1, -7.91624e-08, -2.98023e-08, -1.97906e-09, 6.32771, 0, 1.41311, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody29"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody13" type="StaticBody" parent="."]
+transform = Transform( -0.0584075, -0.652945, -0.000495713, -0.0256815, -0.00036524, 0.499404, -1.85885, 0.0205214, -0.00688408, 20.7307, 4.37195, 1.98906 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody13"]
+transform = Transform( 5.4138, 5.58794e-09, 3.72529e-09, 1.78814e-07, 1, -7.89296e-08, 0, -2.09548e-09, 6.32771, 0, 1.41311, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody13"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody7" type="StaticBody" parent="."]
+transform = Transform( -0.00633409, -0.652945, -0.000495713, -0.00278507, -0.00036524, 0.499404, -0.201586, 0.0205214, -0.00688408, 8.71337, 4.41663, 6.09611 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody7"]
+transform = Transform( 5.4138, 3.72529e-09, 7.45058e-09, 1.19209e-07, 1, -7.91624e-08, -2.98023e-08, -1.97906e-09, 6.32771, 0, 1.41311, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody7"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody11" type="StaticBody" parent="."]
+transform = Transform( -0.170777, 1.94773, -4.1473e-09, 0, 8.51801e-08, 0.0949261, -5.43403, -0.0612119, 1.30338e-10, -0.494301, 6.27684, -17.1807 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody11"]
+transform = Transform( 5.414, -3.21738e-07, 3.48349e-08, 1.78821e-07, 9.741, 1.25202e-08, -2.98035e-08, -1.9273e-08, 6.328, -0.346264, 2.72203, -1.80141 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="StaticBody11"]
+transform = Transform( 5.41401, -6.48201e-07, 3.48353e-08, 5.36442e-07, 9.741, 1.25202e-08, -2.98039e-08, -1.9273e-08, 6.328, 13.1439, 25.9185, -1.8014 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 16 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody11"]
+transform = Transform( 5.19713, 8.9407e-08, 3.72831e-08, -2.23517e-08, 7.77708, 1.81571e-08, -2.23518e-08, -1.62883e-08, 8.66888, -1.14441e-05, 2.42406, -1.44568 )
+shape = SubResource( 4 )
+
+[node name="StaticBody8" type="StaticBody" parent="."]
+transform = Transform( -0.00633409, -0.652945, -0.000495713, -0.00278507, -0.00036524, 0.499404, -0.201586, 0.0205214, -0.00688408, 1.94436, 4.41285, 6.30885 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody8"]
+transform = Transform( 5.4138, 3.72529e-09, 7.45058e-09, 1.19209e-07, 1, -7.91624e-08, -2.98023e-08, -1.97906e-09, 6.32771, 0, 1.41311, -1.80149 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody8"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody5" type="StaticBody" parent="."]
+transform = Transform( -0.750143, 0.0269407, -0.000495713, -0.000317697, 0.00902325, 0.499404, 0.0309695, 0.652649, -0.00688408, 4.35444, 4.39414, 4.77792 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody5"]
+transform = Transform( 5.4138, 1.86265e-08, 6.98492e-09, 1.78814e-07, 1, -8.19564e-08, -3.07336e-08, -1.86265e-09, 6.32771, 0.0527759, 1.47207, -1.91363 )
+generate_lightmap = false
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 10 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody5"]
+transform = Transform( 5.19713, 3.72529e-09, 5.21541e-08, 0, 1, -5.96046e-08, -2.23517e-08, -2.09548e-09, 8.66888, 4.76837e-07, 1.47119, -1.44578 )
+shape = SubResource( 4 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="KinematicBody" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 36.2736 )
+
+[node name="MeshInstance" type="MeshInstance" parent="KinematicBody"]
+mesh = ExtResource( 11 )
+material/0 = ExtResource( 15 )
+material/1 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="KinematicBody"]
+transform = Transform( 0.59287, 0, 0, 0, 0.59287, 0, 0, 0, 0.59287, -2.40417, 28.4283, 0 )
+mesh = ExtResource( 8 )
+material/0 = null
+material/1 = null
+material/2 = null
+material/3 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, -5663.81, 0, 0, 0, 1, 0, 0, 0 )
+
+[connection signal="player_entered" from="WASD to move" to="WASD to move/text_message" method="_show_text"]
+[connection signal="player_exited" from="WASD to move" to="WASD to move/text_message" method="_hide_text"]
+[connection signal="player_entered" from="trigger_audio" to="trigger_audio/audio_player" method="_play_sound"]
+[connection signal="player_entered" from="trigger_audio" to="trigger_audio/text_message" method="_show_text"]
+[connection signal="player_exited" from="trigger_audio" to="trigger_audio/audio_player" method="_stop_sound"]
+[connection signal="player_exited" from="trigger_audio" to="trigger_audio/text_message" method="_hide_text"]
+[connection signal="player_entered" from="trigger_extra" to="trigger_extra/text_message" method="_show_text"]
+[connection signal="player_exited" from="trigger_extra" to="trigger_extra/text_message" method="_hide_text"]

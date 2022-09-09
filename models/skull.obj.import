@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/skull.obj-c8d8407fa0aea7ce377b2344c799da61.mesh"
+
+[deps]
+
+files=[ "res://.import/skull.obj-c8d8407fa0aea7ce377b2344c799da61.mesh" ]
+
+source_file="res://models/skull.obj"
+dest_files=[ "res://.import/skull.obj-c8d8407fa0aea7ce377b2344c799da61.mesh", "res://.import/skull.obj-c8d8407fa0aea7ce377b2344c799da61.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
