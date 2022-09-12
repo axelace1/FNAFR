@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/chairunwrapped.obj-8d4230dbcb4bbac335576c9fa0c4befe.mesh"
+
+[deps]
+
+files=[ "res://.import/chairunwrapped.obj-8d4230dbcb4bbac335576c9fa0c4befe.mesh" ]
+
+source_file="res://models/chairunwrapped.obj"
+dest_files=[ "res://.import/chairunwrapped.obj-8d4230dbcb4bbac335576c9fa0c4befe.mesh", "res://.import/chairunwrapped.obj-8d4230dbcb4bbac335576c9fa0c4befe.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

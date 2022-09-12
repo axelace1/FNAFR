@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/partyhat.obj-fc43f5b876d9c00bfe70ed8e9b2391de.mesh"
+
+[deps]
+
+files=[ "res://.import/partyhat.obj-fc43f5b876d9c00bfe70ed8e9b2391de.mesh" ]
+
+source_file="res://models/partyhat.obj"
+dest_files=[ "res://.import/partyhat.obj-fc43f5b876d9c00bfe70ed8e9b2391de.mesh", "res://.import/partyhat.obj-fc43f5b876d9c00bfe70ed8e9b2391de.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
